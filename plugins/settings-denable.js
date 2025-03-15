@@ -769,8 +769,10 @@ cmd({
     if (!isOwner) return reply("*📛 Only the owner can use this command!*");
 
     const cmdList = `
-🌟 *CMD MENU* 🌟
-
+    ----------------------------------------
+    \`\`\`SUBZERO SETTINGS V2\`\`\`
+ -----------------------------------------
+ 
 🔧 *1. Mode*
    - Current Status: ${config.MODE || "public"}
    - Usage: ${config.PREFIX}mode private/public
