@@ -1,5 +1,5 @@
 const { cmd } = require('../command');
-const config = require('../config');
+const config = require('../config'); // Ensure this is the correct path to your config file
 const fs = require('fs');
 const path = require('path');
 
@@ -23,26 +23,31 @@ cmd({
         return reply("❌ Invalid prefix. Allowed prefixes are: `.,?!/,+*`");
     }
 
-    // Update the PREFIX in the config
+    // Update the PREFIX in the runtime config
     config.PREFIX = newPrefix;
 
-    // Save the updated config to the file (if using a config file)
+    // Save the updated config to the file
     const configPath = path.join(__dirname, '../config.js'); // Adjust the path as needed
     try {
-        const configContent = fs.readFileSync(configPath, 'utf8');
+        // Read the config file
+        let configContent = fs.readFileSync(configPath, 'utf8');
+
+        // Update the PREFIX variable in the config file
         const updatedConfigContent = configContent.replace(
-            /PREFIX\s*:\s*["'][.,?!/,+*]["']/,
-            `PREFIX: "${newPrefix}"`
+            /PREFIX\s*:\s*["'][.,?!/,+*]["']/, // Match the current PREFIX value
+            `PREFIX: "${newPrefix}"` // Replace with the new PREFIX value
         );
+
+        // Write the updated content back to the config file
         fs.writeFileSync(configPath, updatedConfigContent, 'utf8');
+
+        // Notify the user
+        return reply(`✅ Prefix updated successfully to: *${newPrefix}*`);
     } catch (error) {
         console.error("Error updating config file:", error);
         return reply("❌ Failed to update the prefix in the config file.");
     }
-
-    return reply(`✅ Prefix updated successfully to: *${newPrefix}*`);
 });
-
 
 
 cmd({
