@@ -1,4 +1,4 @@
-const fs = require('fs');
+/* const fs = require('fs');
 const path = require('path');
 const { cmd } = require('./command'); // Import command handler
 const config = require('./config'); // Import config file
@@ -70,3 +70,4 @@ setInterval(async () => {
         await sendToDeveloper(conn, `Active bots: ${activeBots.join(', ')}`);
     }
 }, 60000); // Check every 60 seconds
+*/
