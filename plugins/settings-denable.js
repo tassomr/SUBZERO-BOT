@@ -773,76 +773,76 @@ cmd({
 
 🔧 *1. Mode*
    - Current Status: ${config.MODE || "public"}
-   - Usage: `.mode private/public`
+   - Usage: \`.mode private/public\`
 
 🎯 *2. Auto Typing*
    - Current Status: ${config.AUTO_TYPING || "off"}
-   - Usage: `.autotyping on/off`
+   - Usage: \`.autotyping on/off\`
 
 🌐 *3. Always Online*
    - Current Status: ${config.ALWAYS_ONLINE || "off"}
-   - Usage: `.alwaysonline on/off`
+   - Usage: \`.alwaysonline on/off\`
 
 🎙️ *4. Auto Recording*
    - Current Status: ${config.AUTO_RECORDING || "off"}
-   - Usage: `.autorecording on/off`
+   - Usage: \`.autorecording on/off\`
 
 📖 *5. Auto Read Status*
    - Current Status: ${config.AUTO_STATUS_REACT || "off"}
-   - Usage: `.autoreadstatus on/off`
+   - Usage: \`.autoreadstatus on/off\`
 
 🚫 *6. Anti Bad Word*
    - Current Status: ${config.ANTI_BAD_WORD || "off"}
-   - Usage: `.antibad on/off`
+   - Usage: \`.antibad on/off\`
 
 🖼️ *7. Auto Sticker*
    - Current Status: ${config.AUTO_STICKER || "off"}
-   - Usage: `.autosticker on/off`
+   - Usage: \`.autosticker on/off\`
 
 💬 *8. Auto Reply*
    - Current Status: ${config.AUTO_REPLY || "off"}
-   - Usage: `.autoreply on/off`
+   - Usage: \`.autoreply on/off\`
 
 ❤️ *9. Auto React*
    - Current Status: ${config.AUTO_REACT || "off"}
-   - Usage: `.autoreact on/off`
+   - Usage: \`.autoreact on/off\`
 
 📢 *10. Status Reply*
    - Current Status: ${config.AUTO_STATUS_REPLY || "off"}
-   - Usage: `.autostatusreply on/off`
+   - Usage: \`.autostatusreply on/off\`
 
 🔗 *11. Anti Link*
    - Current Status: ${config.ANTI_LINK || "off"}
-   - Usage: `.antilink on/off`
+   - Usage: \`.antilink on/off\`
 
 🤖 *12. Anti Bot*
    - Current Status: ${antibotAction || "off"}
-   - Usage: `.antibot off/warn/delete/kick`
+   - Usage: \`.antibot off/warn/delete/kick\`
 
 💖 *13. Heart React*
    - Current Status: ${config.HEART_REACT || "off"}
-   - Usage: `.heartreact on/off`
+   - Usage: \`.heartreact on/off\`
 
 📊 *14. Poll*
-   - Usage: `.poll question;option1,option2,...`
+   - Usage: \`.poll question;option1,option2,...\`
 
 💞 *15. Random Ship*
-   - Usage: `.randomship`
+   - Usage: \`.randomship\`
 
 👥 *16. New Group*
-   - Usage: `.newgc group_name;number1,number2,...`
+   - Usage: \`.newgc group_name;number1,number2,...\`
 
 🚪 *17. Exit Group*
-   - Usage: `.exit`
+   - Usage: \`.exit\`
 
 🔗 *18. Group Invite Link*
-   - Usage: `.invite2`
+   - Usage: \`.invite2\`
 
 📢 *19. Broadcast*
-   - Usage: `.broadcast <text>`
+   - Usage: `\.broadcast <text>\`
 
 🖼️ *20. Set Group Profile Picture*
-   - Usage: `.setgrouppp (reply to an image)`
+   - Usage: `\.setgrouppp (reply to an image)\`
 
 📌 *Note*: Replace "on/off" with the desired state to enable or disable a feature.
 `;
