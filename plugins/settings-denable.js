@@ -12,6 +12,26 @@ const path = require('path');
 let antilinkAction = "off"; // Default state
 let warnCount = {}; // Track warnings per user
 
+
+cmd({
+    pattern: "setprefix",
+    alias: ["prefix"],
+    react: "🔧",
+    desc: "Change the bot's command prefix.",
+    category: "settings",
+    filename: __filename,
+}, async (conn, mek, m, { from, args, isOwner, reply }) => {
+    if (!isOwner) return reply("*📛 Only the owner can use this command!*");
+
+    const newPrefix = args[0]; // Get the new prefix from the command arguments
+    if (!newPrefix) return reply("❌ Please provide a new prefix. Example: `.setprefix !`");
+
+    // Update the prefix in memory
+    config.PREFIX = newPrefix;
+
+    return reply(`✅ Prefix successfully changed to *${newPrefix}*`);
+});
+
 cmd({
     pattern: "mode",
     alias: ["setmode"],
@@ -736,4 +756,96 @@ cmd({
     } else {
         return reply("*🔥 Example: .heartreact on* or *[.heartreact off]*");
     }
+});
+
+cmd({
+    pattern: "settingsmenu",
+    alias: ["settingsusage", "cmdlist"],
+    react: "📜",
+    desc: "List all commands and their current status.",
+    category: "settings",
+    filename: __filename,
+}, async (conn, mek, m, { from, isOwner, reply }) => {
+    if (!isOwner) return reply("*📛 Only the owner can use this command!*");
+
+    const cmdList = `
+🌟 *CMD MENU* 🌟
+
+🔧 *1. Mode*
+   - Current Status: ${config.MODE || "public"}
+   - Usage: `.mode private/public`
+
+🎯 *2. Auto Typing*
+   - Current Status: ${config.AUTO_TYPING || "off"}
+   - Usage: `.autotyping on/off`
+
+🌐 *3. Always Online*
+   - Current Status: ${config.ALWAYS_ONLINE || "off"}
+   - Usage: `.alwaysonline on/off`
+
+🎙️ *4. Auto Recording*
+   - Current Status: ${config.AUTO_RECORDING || "off"}
+   - Usage: `.autorecording on/off`
+
+📖 *5. Auto Read Status*
+   - Current Status: ${config.AUTO_STATUS_REACT || "off"}
+   - Usage: `.autoreadstatus on/off`
+
+🚫 *6. Anti Bad Word*
+   - Current Status: ${config.ANTI_BAD_WORD || "off"}
+   - Usage: `.antibad on/off`
+
+🖼️ *7. Auto Sticker*
+   - Current Status: ${config.AUTO_STICKER || "off"}
+   - Usage: `.autosticker on/off`
+
+💬 *8. Auto Reply*
+   - Current Status: ${config.AUTO_REPLY || "off"}
+   - Usage: `.autoreply on/off`
+
+❤️ *9. Auto React*
+   - Current Status: ${config.AUTO_REACT || "off"}
+   - Usage: `.autoreact on/off`
+
+📢 *10. Status Reply*
+   - Current Status: ${config.AUTO_STATUS_REPLY || "off"}
+   - Usage: `.autostatusreply on/off`
+
+🔗 *11. Anti Link*
+   - Current Status: ${config.ANTI_LINK || "off"}
+   - Usage: `.antilink on/off`
+
+🤖 *12. Anti Bot*
+   - Current Status: ${antibotAction || "off"}
+   - Usage: `.antibot off/warn/delete/kick`
+
+💖 *13. Heart React*
+   - Current Status: ${config.HEART_REACT || "off"}
+   - Usage: `.heartreact on/off`
+
+📊 *14. Poll*
+   - Usage: `.poll question;option1,option2,...`
+
+💞 *15. Random Ship*
+   - Usage: `.randomship`
+
+👥 *16. New Group*
+   - Usage: `.newgc group_name;number1,number2,...`
+
+🚪 *17. Exit Group*
+   - Usage: `.exit`
+
+🔗 *18. Group Invite Link*
+   - Usage: `.invite2`
+
+📢 *19. Broadcast*
+   - Usage: `.broadcast <text>`
+
+🖼️ *20. Set Group Profile Picture*
+   - Usage: `.setgrouppp (reply to an image)`
+
+📌 *Note*: Replace "on/off" with the desired state to enable or disable a feature.
+`;
+
+    return reply(cmdList);
 });
