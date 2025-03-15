@@ -14,7 +14,7 @@ let warnCount = {}; // Track warnings per user
 
 cmd({
     pattern: "mode",
-        alias: ["setmode"],
+    alias: ["setmode"],
     react: "🫟",
     desc: "Set bot mode to private or public.",
     category: "settings",
@@ -114,7 +114,7 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 cmd({
     pattern: "autoreadstatus",
-        alias: ["setautoreadstatus"],
+    alias: ["setautoreadstatus"],
     react: "🫟",
     alias: ["autostatusreact"],
     desc: "Enable or disable auto-viewing of statuses",
@@ -216,7 +216,7 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 cmd({
     pattern: "antibad",
-        alias: ["setantibad"],
+    alias: ["setantibad"],
     react: "🫟",
     alias: ["antibadword"],
     desc: "enable or disable antibad.",
@@ -243,7 +243,7 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 cmd({
     pattern: "autosticker",
-        alias: ["setautosticker"],
+    alias: ["setautosticker"],
     react: "🫟",
     alias: ["autosticker"],
     desc: "enable or disable auto-sticker.",
@@ -270,7 +270,7 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 cmd({
     pattern: "autoreply",
-        alias: ["setautoreply"],
+    alias: ["setautoreply"],
     react: "🫟",
     alias: ["autoreply"],
     desc: "enable or disable auto-reply.",
@@ -298,7 +298,7 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 cmd({
     pattern: "autoreact",
-        alias: ["setautoreact"],
+    alias: ["setautoreact"],
     react: "🫟",
     alias: ["autoreact"],
     desc: "Enable or disable the autoreact feature",
@@ -658,7 +658,7 @@ cmd({
 //--------------------------------------------
 cmd({
   pattern: "broadcast",
-      alias: ["bcall","bc"],
+  alias: ["bcall","bc"],
   react: "🫟",
   category: "group",
   desc: "Bot makes a broadcast in all groups",
