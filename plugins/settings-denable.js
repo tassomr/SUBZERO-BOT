@@ -14,6 +14,8 @@ let warnCount = {}; // Track warnings per user
 
 cmd({
     pattern: "mode",
+        alias: ["setmode"],
+    react: "🫟",
     desc: "Set bot mode to private or public.",
     category: "settings",
     filename: __filename,
@@ -40,6 +42,8 @@ cmd({
 
 cmd({
     pattern: "autotyping",
+    alias: ["setautotyping"],
+    react: "🫟",
     description: "Enable or disable auto-typing feature.",
     category: "settings",
     filename: __filename
@@ -60,7 +64,8 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 cmd({
     pattern: "alwaysonline",
-    alias: ["alwaysonline"],
+    react: "🫟",
+    alias: ["setalwaysonline"],
     description: "Set bot status to always online or offline.",
     category: "settings",
     filename: __filename
@@ -82,7 +87,7 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 cmd({
     pattern: "autorecording",
-    alias: ["autorecoding"],
+    alias: ["autorecoding","setautorecording"],
     description: "Enable or disable auto-recording feature.",
     category: "settings",
     filename: __filename
@@ -109,6 +114,8 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 cmd({
     pattern: "autoreadstatus",
+        alias: ["setautoreadstatus"],
+    react: "🫟",
     alias: ["autostatusreact"],
     desc: "Enable or disable auto-viewing of statuses",
     category: "settings",
@@ -209,6 +216,8 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 cmd({
     pattern: "antibad",
+        alias: ["setantibad"],
+    react: "🫟",
     alias: ["antibadword"],
     desc: "enable or disable antibad.",
     category: "settings",
@@ -234,6 +243,8 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 cmd({
     pattern: "autosticker",
+        alias: ["setautosticker"],
+    react: "🫟",
     alias: ["autosticker"],
     desc: "enable or disable auto-sticker.",
     category: "settings",
@@ -259,6 +270,8 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 cmd({
     pattern: "autoreply",
+        alias: ["setautoreply"],
+    react: "🫟",
     alias: ["autoreply"],
     desc: "enable or disable auto-reply.",
     category: "settings",
@@ -285,6 +298,8 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 cmd({
     pattern: "autoreact",
+        alias: ["setautoreact"],
+    react: "🫟",
     alias: ["autoreact"],
     desc: "Enable or disable the autoreact feature",
     category: "settings",
@@ -308,9 +323,10 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
 //--------------------------------------------
 //  STATUS-REPLY COMMANDS
 //--------------------------------------------
-/*
+
 cmd({
-    pattern: "status-reply",
+    pattern: "setautostatusreply",
+    react: "🫟",
     alias: ["autostatusreply"],
     desc: "enable or disable status-reply.",
     category: "settings",
@@ -331,12 +347,13 @@ async (conn, mek, m, { from, args, isOwner, reply }) => {
         return reply(`*🫟 ᴇxᴀᴍᴘʟᴇ:  .sᴛᴀᴛᴜs-ʀᴇᴘʟʏ ᴏɴ*`);
     }
 });
-*/
+
 //--------------------------------------------
 //  ANTILINK1 COMMANDS
 //--------------------------------------------
 cmd({
     pattern: "antilink1",
+    react: "🫟",
     desc: "Enable Antilink (warn/delete/kick) or turn off",
     category: "group",
     filename: __filename
@@ -386,6 +403,7 @@ let warnings = {}; // Store warning counts per user
 
 cmd({
     pattern: "antibot",
+    react: "🫟",
     alias: ["antibot"],
     desc: "Enable Antibot and set action (off/warn/delete/kick)",
     category: "group",
@@ -439,6 +457,7 @@ cmd({
 //--------------------------------------------
 cmd({
   pattern: "antilink",
+  react: "🫟",
   alias: ["antilink"],
   desc: "Enable or disable anti-link feature in groups",
   category: "group",
@@ -470,6 +489,7 @@ cmd({
 //--------------------------------------------
 cmd({
   pattern: "poll",
+  react: "🫟",
   category: "group",
   desc: "Create a poll with a question and options in the group.",
   filename: __filename,
@@ -509,6 +529,7 @@ cmd({
 //--------------------------------------------
 cmd({
     pattern: "randomship",
+    react: "🫟",
     desc: "Randomly ship two members in a group.",
     category: "group",
     react: "💞",
@@ -538,13 +559,15 @@ cmd({
 //--------------------------------------------
 cmd({
   pattern: "newgc",
+      alias: ["creategc","creategroup"],
+  react: "🫟",
   category: "group",
   desc: "Create a new group and add participants.",
   filename: __filename,
 }, async (conn, mek, m, { from, isGroup, body, sender, groupMetadata, participants, reply }) => {
   try {
     if (!body) {
-      return reply(`Usage: !newgc group_name;number1,number2,...`);
+      return reply(`Usage: .newgc group_name;number1,number2,...`);
     }
 
     const [groupName, numbersString] = body.split(";");
@@ -560,7 +583,7 @@ cmd({
 
     const inviteLink = await conn.groupInviteCode(group.id); // Use group.id to get the invite link
 
-    await conn.sendMessage(group.id, { text: 'hello there' });
+    await conn.sendMessage(group.id, { text: '🫟 hello there' });
 
     reply(`Group created successfully with invite link: https://chat.whatsapp.com/${inviteLink}\nWelcome message sent.`);
   } catch (e) {
@@ -572,13 +595,14 @@ cmd({
 //--------------------------------------------
 cmd({
   pattern: "exit",
+  react: "🫟",
   desc: "Leaves the current group",
   category: "group",
 }, async (conn, mek, m, { from, reply }) => {
   try {
     // `from` is the group chat ID
     await conn.groupLeave(from);
-    reply("Successfully left the group🙂.");
+    reply("Subzero Successfully left the group🙂.");
   } catch (error) {
     console.error(error);
     reply("Failed to leave the group.🤦🏽‍♂️");
@@ -589,6 +613,7 @@ cmd({
 //--------------------------------------------
 cmd({
     pattern: "invite2",
+    react: "🫟",
     alias: ["glink"],
     desc: "Get group invite link.",
     category: "group", // Already group
@@ -633,6 +658,8 @@ cmd({
 //--------------------------------------------
 cmd({
   pattern: "broadcast",
+      alias: ["bcall","bc"],
+  react: "🫟",
   category: "group",
   desc: "Bot makes a broadcast in all groups",
   filename: __filename,
@@ -668,7 +695,8 @@ cmd({
 //  AUTO_RECORDING COMMANDS
 //--------------------------------------------
 cmd({
-    pattern: "setgpp",
+    pattern: "setgrouppp",
+    react: "🫟",
     desc: "Set full-screen profile picture for groups.",
     category: "group",
     filename: __filename
@@ -689,6 +717,7 @@ cmd({
 });
 cmd({
     pattern: "heartreact",
+    react: "🫟",
     alias: ["heart"],
     desc: "Enable or disable heart react.",
     category: "settings",
