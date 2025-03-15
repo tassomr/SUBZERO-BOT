@@ -773,80 +773,80 @@ cmd({
 
 🔧 *1. Mode*
    - Current Status: ${config.MODE || "public"}
-   - Usage: .mode private/public
+   - Usage: ${config.PREFIX}mode private/public
 
 🎯 *2. Auto Typing*
    - Current Status: ${config.AUTO_TYPING || "off"}
-   - Usage: .autotyping on/off
+   - Usage: ${config.PREFIX}autotyping on/off
 
 🌐 *3. Always Online*
    - Current Status: ${config.ALWAYS_ONLINE || "off"}
-   - Usage: .alwaysonline on/off
+   - Usage: ${config.PREFIX}alwaysonline on/off
 
 🎙️ *4. Auto Recording*
    - Current Status: ${config.AUTO_RECORDING || "off"}
-   - Usage: .autorecording on/off
+   - Usage: ${config.PREFIX}autorecording on/off
 
 📖 *5. Auto Read Status*
    - Current Status: ${config.AUTO_STATUS_REACT || "off"}
-   - Usage: .autoreadstatus on/off
+   - Usage: ${config.PREFIX}autoreadstatus on/off
 
 🚫 *6. Anti Bad Word*
    - Current Status: ${config.ANTI_BAD_WORD || "off"}
-   - Usage: .antibad on/off
+   - Usage: ${config.PREFIX}antibad on/off
 
 🖼️ *7. Auto Sticker*
    - Current Status: ${config.AUTO_STICKER || "off"}
-   - Usage: .autosticker on/off
+   - Usage: ${config.PREFIX}autosticker on/off
 
 💬 *8. Auto Reply*
    - Current Status: ${config.AUTO_REPLY || "off"}
-   - Usage: .autoreply on/off
+   - Usage: ${config.PREFIX}autoreply on/off
 
 ❤️ *9. Auto React*
    - Current Status: ${config.AUTO_REACT || "off"}
-   - Usage: .autoreact on/off
+   - Usage: ${config.PREFIX}autoreact on/off
 
 📢 *10. Status Reply*
    - Current Status: ${config.AUTO_STATUS_REPLY || "off"}
-   - Usage: .autostatusreply on/off
+   - Usage: ${config.PREFIX}autostatusreply on/off
 
 🔗 *11. Anti Link*
    - Current Status: ${config.ANTI_LINK || "off"}
-   - Usage: .antilink on/off
+   - Usage: ${config.PREFIX}antilink on/off
 
 🤖 *12. Anti Bot*
    - Current Status: ${antibotAction || "off"}
-   - Usage: .antibot off/warn/delete/kick
+   - Usage: ${config.PREFIX}antibot off/warn/delete/kick
 
 💖 *13. Heart React*
    - Current Status: ${config.HEART_REACT || "off"}
-   - Usage: .heartreact on/off
+   - Usage: ${config.PREFIX}heartreact on/off
 
 🔧 *14. Set Prefix*
    - Current Prefix: ${config.PREFIX || "."}
-   - Usage: .setprefix <new_prefix>
+   - Usage: ${config.PREFIX}setprefix <new_prefix>
 
 📊 *15. Poll*
-   - Usage: .poll question;option1,option2,...
+   - Usage: ${config.PREFIX}poll question;option1,option2,...
 
 💞 *16. Random Ship*
-   - Usage: .randomship
+   - Usage: ${config.PREFIX}randomship
 
 👥 *17. New Group*
-   - Usage: .newgc group_name;number1,number2,...
+   - Usage: ${config.PREFIX}newgc group_name;number1,number2,...
 
 🚪 *18. Exit Group*
-   - Usage: .exit
+   - Usage: ${config.PREFIX}exit
 
 🔗 *19. Group Invite Link*
-   - Usage: .invite2
+   - Usage: ${config.PREFIX}invite2
 
 📢 *20. Broadcast*
-   - Usage: .broadcast <text>
+   - Usage: ${config.PREFIX}broadcast <text>
 
 🖼️ *21. Set Group Profile Picture*
-   - Usage: .setgrouppp (reply to an image)
+   - Usage: ${config.PREFIX}setgrouppp (reply to an image)
 
 📌 *Note*: Replace "on/off" with the desired state to enable or disable a feature.
 `;
