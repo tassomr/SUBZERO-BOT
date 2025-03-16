@@ -109,7 +109,7 @@ cmd({
       return _0x2ac5cb("*Please provide search keywords for the image. Eg Subzero*");
     }
     _0x2ac5cb("*🔍 Showing Results For - " + _0x3207b0 + "...*");
-    const _0x2f5556 = 'https://rubenbot-subzero-api.hf.space/download/piniimg?text=' + encodeURIComponent(_0x3207b0);
+    const _0x2f5556 = 'https://apis.davidcyriltech.my.id/googleimage?query=' + encodeURIComponent(_0x3207b0);
     const _0x530cac = await axios.get(_0x2f5556);
     if (!_0x530cac.data || !_0x530cac.data.result || _0x530cac.data.result.length === 0x0) {
       return _0x2ac5cb("❌ No images found for \"" + _0x3207b0 + "\".");
