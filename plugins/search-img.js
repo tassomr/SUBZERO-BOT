@@ -24,8 +24,8 @@ const {
 const axios = require('axios');
 
 cmd({
-  pattern: 'imgsearch2',
-  alias: ['img2','pin2','image2'],
+  pattern: 'imgsearch',
+  alias: ['img','pin','image'],
   react: '🔍',
   desc: 'Search for images on Google',
   category: 'image',
@@ -91,8 +91,8 @@ cmd({
 
 //########
 cmd({
-  'pattern': "img",
-  'alias': ["image", "pinterest", "pinimg"],
+  'pattern': "img2",
+  'alias': ["image2", "pinterest2", "pinimg2"],
   'react': '🖼️',
   'desc': "Search and download images from Pinterest using keywords.",
   'category': "image",
