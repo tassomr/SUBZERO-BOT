@@ -8,7 +8,7 @@ const Config = require('../config');
 cmd(
     {
         pattern: 'sticker2img',
-        alias: ['s2i', 'stickertoimage'],
+        alias: ['s2i', 'stickertoimage','toimg','toimage','tophoto','sticker2image'],
         desc: 'Convert a sticker to an image.',
         category: 'sticker',
         use: '<reply to a sticker>',
