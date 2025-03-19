@@ -1,6 +1,6 @@
 {
   "name": "SUBZERO-MD",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "description": "THE BEST BOT IN THE UNIVERSE",
   "main": "index.js",
   "scripts": {
@@ -12,11 +12,12 @@
   "dependencies": {
     "@whiskeysockets/baileys": "6.6.0",
     "@adiwajshing/keyed-db": "^0.2.4",
-    "@dark-yasiya/yt-dl.js": "1.0.5",
+    "@dark-yasiya/yt-dl.js":"latest", 
+    "@dark-yasiya/scrap":"1.0.1",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@vitalets/google-translate-api": "^9.2.0",
     "pino": "^7.0.5",
-    "pm2": "^5.2.0",
+    "pm2": "^6.0.5",
     "util": "^0.12.4",
     "express": "latest",
     "axios": "^1.2.5",
