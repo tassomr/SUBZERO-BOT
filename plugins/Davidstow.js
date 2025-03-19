@@ -1,4 +1,4 @@
-
+/*
 
 (function (_0x28d7c2, _0x3928c4) {
   const _0x1d3ee6 = _0x28d7c2();
@@ -250,3 +250,5 @@ cmd(_0x376899, async (_0x2e316a, _0x282885, _0x299476, {
     await _0x13342e("❌ *An error occurred:* " + (_0x5760ed.message || 'Error!'));
   }
 });
+
+*/
