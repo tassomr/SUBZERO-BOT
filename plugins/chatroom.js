@@ -1,4 +1,4 @@
-const { cmd } = require('../command');
+/* const { cmd } = require('../command');
 const axios = require('axios');
 const fs = require('fs-extra');
 const Config = require('../config');
@@ -107,3 +107,4 @@ function waitForUserResponse(chatId, userId) {
         conn.on('message', listener);
     });
 }
+*/
