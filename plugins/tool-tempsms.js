@@ -34,14 +34,14 @@ cmd({
     const { country, number, link } = randomNumber;
 
     // Prepare the message
-    const message = `📞 *Temporary Number for SMS Verification* 📞\n\n` +
+    const message = `📞 *\`Temporary Number for SMS\`* 📞\n\n` +
                     `🌍 *Country:* ${country}\n` +
                     `📱 *Number:* ${number}\n` +
-                    `🔗 *Link:* ${link}`+
+                    `🔗 *Link:* ${link}\n\n` +
                     `> © 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐁𝐎𝐓`;
 
     // Attach an image (replace with your image URL)
-    const imageUrl = "https://i.postimg.cc/WpQLCg85/White-and-Green-Simple-Professional-Business-Project-Presentation.jpg"; // Example image URL
+    const imageUrl = "https://i.postimg.cc/nLn4gDGg/Glavnoe-New-Africa-0f076b51bf.webp"; // Example image URL
 
     // Send the message with the image
     await conn.sendMessage(from, {
