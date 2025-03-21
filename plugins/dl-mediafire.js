@@ -2,8 +2,8 @@ const axios = require("axios");
 const { cmd } = require("../command");
 
 cmd({
-  pattern: "mediafire",
-  alias: ["mfire", "mfdownload"],
+  pattern: "mediafire2",
+  alias: ["mfire2", "mfdownload2"],
   react: '📥',
   desc: "Download files from MediaFire.",
   category: "download",
@@ -123,8 +123,8 @@ cmd({
 /// MEDIAFIRE 2
 
 cmd({
-  pattern: "mediafire2",
-  alias: ["mfire2", "mediafire2"],
+  pattern: "mediafire",
+  alias: ["mfire", "media"],
   react: '📂',
   desc: "Download files from MediaFire using Keith's API.",
   category: "download",
@@ -168,7 +168,7 @@ cmd({
       document: fileResponse.data,
       mimetype: fileType,
       fileName: fileName,
-      caption: `📂 *File Name:* ${fileName}\n📦 *File Size:* ${size}\n📅 *Upload Date:* ${date}\n🔗 *Download Link:* ${dl_link}`,
+      caption: `📂 *File Name:* ${fileName}\n📦 *File Size:* ${size}\n📅 *Upload Date:* ${date}\n `,
       contextInfo: {
         mentionedJid: [m.sender],
         forwardingScore: 999,
