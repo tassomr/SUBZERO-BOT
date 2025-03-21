@@ -1,7 +1,7 @@
 /*
 
-Plugin Author: *@DarkYasiya*
-Follow Us: *https://whatsapp.com/channel/0029VaaPfFK7Noa8nI8zGg27*
+- MADE BY MR FRANK 
+- COPY WITH CREDITS
 
 */
 
@@ -41,17 +41,17 @@ cmd({
 
         const { url, title, image, timestamp, ago, views, author } = data.results[0];
 
-        let info = `🍄 *𝚂𝙾𝙽𝙶 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳𝙴𝚁* 🍄\n\n` +
+        let info = ` *❄️ sᴜʙᴢᴇʀᴏ sᴏɴɢ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ ❄️*\n\n` +
             `🎵 *Title:* ${title || "Unknown"}\n` +
             `⏳ *Duration:* ${timestamp || "Unknown"}\n` +
             `👀 *Views:* ${views || "Unknown"}\n` +
             `🌏 *Release Ago:* ${ago || "Unknown"}\n` +
             `👤 *Author:* ${author?.name || "Unknown"}\n` +
-            `🖇 *Url:* ${url || "Unknown"}\n\n` +
+            `🖇 *Url:* ${url || "Unknown"}\n⟡────────────⟡\n\n` +
             `🔽 *Reply with your choice:*\n` +
-            `1️⃣.1️⃣ *Audio Type* 🎵\n` +
-            `1️⃣.2️⃣ *Document Type* 📁\n\n` +
-            `${config.FOOTER || "POWERED BY SUBZERO"}`;
+            `1️⃣. *Audio Type* 🎵\n` +
+            `2️⃣. *Document Type* 📁\n\n` +
+            `${config.FOOTER || "> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍʀ ғʀᴀɴᴋ"}`;
 
         const sentMsg = await conn.sendMessage(from, { image: { url: image }, caption: info }, { quoted: mek });
         const messageID = sentMsg.key.id;
@@ -73,26 +73,26 @@ cmd({
                 let type;
                 let response;
                 
-                if (userReply === "1.1") {
-                    msg = await conn.sendMessage(from, { text: "⏳ Processing..." }, { quoted: mek });
+                if (userReply === "1") {
+                    msg = await conn.sendMessage(from, { text: "⏳ Subzero Processing..." }, { quoted: mek });
                     response = await dy_scrap.ytmp3(`https://youtube.com/watch?v=${id}`);
                     let downloadUrl = response?.result?.download?.url;
                     if (!downloadUrl) return await reply("❌ Download link not found!");
                     type = { audio: { url: downloadUrl }, mimetype: "audio/mpeg" };
                     
-                } else if (userReply === "1.2") {
-                    msg = await conn.sendMessage(from, { text: "⏳ Processing..." }, { quoted: mek });
+                } else if (userReply === "2") {
+                    msg = await conn.sendMessage(from, { text: "⏳ Subzero Processing..." }, { quoted: mek });
                     const response = await dy_scrap.ytmp3(`https://youtube.com/watch?v=${id}`);
                     let downloadUrl = response?.result?.download?.url;
                     if (!downloadUrl) return await reply("❌ Download link not found!");
                     type = { document: { url: downloadUrl }, fileName: `${title}.mp3`, mimetype: "audio/mpeg", caption: title };
                     
                 } else { 
-                    return await reply("❌ Invalid choice! Reply with 1️⃣.1️⃣ or 1️⃣.2️⃣.");
+                    return await reply("❌ Invalid choice! Reply with 1️⃣ or 2️⃣.");
                 }
 
                 await conn.sendMessage(from, type, { quoted: mek });
-                await conn.sendMessage(from, { text: '✅ Media Upload Successful ✅', edit: msg.key });
+                await conn.sendMessage(from, { text: '✅ Song Downloaded Successfully ✅', edit: msg.key });
 
             } catch (error) {
                 console.error(error);
