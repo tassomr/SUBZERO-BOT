@@ -1,4 +1,4 @@
-5/*
+/*
 
 - MADE BY MR FRANK 
 - COPY WITH CREDITS
@@ -17,8 +17,8 @@ function replaceYouTubeID(url) {
 }
 
 cmd({
-    pattern: "songc",
-    alias: ["ytmp3c", "ytmp3dls"],
+    pattern: "songs",
+    alias: ["ytmp3s", "ytmp3dls"],
     react: "🎵",
     desc: "Download Ytmp3",
     category: "download",
@@ -41,17 +41,19 @@ cmd({
 
         const { url, title, image, timestamp, ago, views, author } = data.results[0];
 
-        let info = ` *\`📽️ 𝚂𝚄𝙱𝚉𝙴𝚁𝙾 𝚈𝚃 𝙿𝙻𝙰𝚈𝙴𝚁📽️\`*\n\n` +
+        let info = ` *\`📽️ 𝚂𝚄𝙱𝚉𝙴𝚁𝙾 𝚈𝙾𝚄𝚃𝚄𝙱𝙴 𝙿𝙻𝙰𝚈𝙴𝚁📽️\`*\n\n` +
             `🎵 *Title:* ${title || "Unknown"}\n` +
             `⏳ *Duration:* ${timestamp || "Unknown"}\n` +
             `👀 *Views:* ${views || "Unknown"}\n` +
             `🌏 *Release Ago:* ${ago || "Unknown"}\n` +
             `👤 *Author:* ${author?.name || "Unknown"}\n` +
             `🖇 *Url:* ${url || "Unknown"}\n\n⟡────────────────⟡\n\n` +
-            `🔢 *Reply with your choice:*\n\n` +
+            `🔢 *Reply with your choice:*\n` +
             `1️⃣ | *Audio* Type 🎵\n` +
             `2️⃣ | *Document* Type 📁\n` +
-            `3️⃣ | *Video* Type 🎥\n\n` +
+            `3️⃣ | *Video* Type 🎥\n` +
+            `4️⃣ | *Audio (v2)* Type 🎵\n` +
+            `5️⃣ | *Video (v2)* Type 🎥\n\n` +
             `${config.FOOTER || "> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍʀ ғʀᴀɴᴋ"}`;
 
         const sentMsg = await conn.sendMessage(from, { image: { url: image }, caption: info }, { quoted: mek });
@@ -90,17 +92,31 @@ cmd({
                     
                 } else if (userReply === "3") {
                     msg = await conn.sendMessage(from, { text: "⏳ Subzero Processing..." }, { quoted: mek });
-                    const response = await dy_scrap.ytmp4(`https://youtube.com/watch?v=${id}`);
+                    const response = await dy_scrap.ytmp4(`https://youtube.com/watch?v=${id}`, 360); // Default quality: 360p
+                    let downloadUrl = response?.result?.download?.url;
+                    if (!downloadUrl) return await reply("❌ Download link not found!");
+                    type = { video: { url: downloadUrl }, caption: title };
+                    
+                } else if (userReply === "4") {
+                    msg = await conn.sendMessage(from, { text: "⏳ Subzero Processing..." }, { quoted: mek });
+                    const response = await dy_scrap.ytmp3_v2(`https://youtube.com/watch?v=${id}`);
+                    let downloadUrl = response?.result?.download?.url;
+                    if (!downloadUrl) return await reply("❌ Download link not found!");
+                    type = { audio: { url: downloadUrl }, mimetype: "audio/mpeg" };
+                    
+                } else if (userReply === "5") {
+                    msg = await conn.sendMessage(from, { text: "⏳ Subzero Processing..." }, { quoted: mek });
+                    const response = await dy_scrap.ytmp4_v2(`https://youtube.com/watch?v=${id}`, 360); // Default quality: 360p
                     let downloadUrl = response?.result?.download?.url;
                     if (!downloadUrl) return await reply("❌ Download link not found!");
                     type = { video: { url: downloadUrl }, caption: title };
                     
                 } else { 
-                    return await reply("❌ Invalid choice! Reply with 1️⃣, 2️⃣, or 3️⃣.");
+                    return await reply("❌ Invalid choice! Reply with 1️⃣, 2️⃣, 3️⃣, 4️⃣, or 5️⃣.");
                 }
 
                 await conn.sendMessage(from, type, { quoted: mek });
-                await conn.sendMessage(from, { text: '✅ Download Successful ✅', edit: msg.key });
+                await conn.sendMessage(from, { text: '✅ Downloaded Successfully ✅', edit: msg.key });
 
             } catch (error) {
                 console.error(error);
