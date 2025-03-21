@@ -76,14 +76,14 @@ cmd({
                 let response;
                 
                 if (userReply === "1") {
-                    msg = await conn.sendMessage(from, { text: "_⏳ Subzero Processing..._" }, { quoted: mek });
+                    msg = await conn.sendMessage(from, { text: "_⏳ Subzero Processing, Wait 5 seconds..._" }, { quoted: mek });
                     response = await dy_scrap.ytmp3(`https://youtube.com/watch?v=${id}`);
                     let downloadUrl = response?.result?.download?.url;
                     if (!downloadUrl) return await reply("❌ Download link not found!");
                     type = { audio: { url: downloadUrl }, mimetype: "audio/mpeg" };
                     
                 } else if (userReply === "2") {
-                    msg = await conn.sendMessage(from, { text: "_⏳ Subzero Processing..._" }, { quoted: mek });
+                    msg = await conn.sendMessage(from, { text: "_⏳ Subzero Processing, Wait 5 seconds..._" }, { quoted: mek });
                     const response = await dy_scrap.ytmp3(`https://youtube.com/watch?v=${id}`);
                     let downloadUrl = response?.result?.download?.url;
                     if (!downloadUrl) return await reply("❌ Download link not found!");
@@ -91,7 +91,7 @@ cmd({
                     
                 
                 } else if (userReply === "3") {
-                    msg = await conn.sendMessage(from, { text: "_⏳ Subzero Processing..._" }, { quoted: mek });
+                    msg = await conn.sendMessage(from, { text: "_⏳ Subzero Processing, Wait 5 seconds..._" }, { quoted: mek });
                     const response = await dy_scrap.ytmp4_v2(`https://youtube.com/watch?v=${id}`, 360); // Default quality: 360p
                     let downloadUrl = response?.result?.download?.url;
                     if (!downloadUrl) return await reply("❌ Download link not found!");
