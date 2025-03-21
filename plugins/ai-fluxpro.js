@@ -52,6 +52,7 @@ const { fetchJson } = require('../lib/functions');
 
 cmd({
   pattern: 'fluxpro',
+  alias: 'flux',
   react: '🧩',
   desc: 'Generate an image using Flux',
   category: 'image',
