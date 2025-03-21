@@ -118,3 +118,77 @@ cmd({
     await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
   }
 });
+
+
+/// MEDIAFIRE 2
+
+cmd({
+  pattern: "mediafire2",
+  alias: ["mfire2", "mediafire2"],
+  react: '📂',
+  desc: "Download files from MediaFire using Keith's API.",
+  category: "download",
+  use: ".mediafire2 <MediaFire URL>",
+  filename: __filename
+}, async (conn, mek, m, { from, reply, args, q }) => {
+  try {
+    // Check if the user provided a URL
+    if (!q) {
+      return reply('Please provide a MediaFire URL. Example: `.mediafire2 https://www.mediafire.com/...`');
+    }
+
+    // Add a reaction to indicate processing
+    await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
+
+    // Prepare the API URL
+    const apiUrl = `https://apis-keith.vercel.app/download/mfire?url=${encodeURIComponent(q)}`;
+
+    // Call the API using GET
+    const response = await axios.get(apiUrl);
+
+    // Check if the API response is valid
+    if (!response.data || !response.data.status || !response.data.result || !response.data.result.dl_link) {
+      return reply('❌ Unable to fetch the file. Please try again later.');
+    }
+
+    // Extract file details
+    const { fileName, fileType, size, date, dl_link } = response.data.result;
+
+    // Inform the user that the file is being downloaded
+    await reply(`📂 *Downloading ${fileName}...*`);
+
+    // Download the file
+    const fileResponse = await axios.get(dl_link, { responseType: 'arraybuffer' });
+    if (!fileResponse.data) {
+      return reply('❌ Failed to download the file. Please try again later.');
+    }
+
+    // Send the file with emojis in the message content
+    await conn.sendMessage(from, {
+      document: fileResponse.data,
+      mimetype: fileType,
+      fileName: fileName,
+      caption: `📂 *File Name:* ${fileName}\n📦 *File Size:* ${size}\n📅 *Upload Date:* ${date}\n🔗 *Download Link:* ${dl_link}`,
+      contextInfo: {
+        mentionedJid: [m.sender],
+        forwardingScore: 999,
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: '120363304325601080@newsletter',
+          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
+          serverMessageId: 143
+        }
+      }
+    }, { quoted: mek });
+
+    // Add a reaction to indicate success
+    await conn.sendMessage(from, { react: { text: '✅', key: m.key } });
+  } catch (error) {
+    console.error('Error downloading file:', error);
+    reply('❌ Unable to download the file. Please try again later.');
+
+    // Add a reaction to indicate failure
+    await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
+  }
+});
+
