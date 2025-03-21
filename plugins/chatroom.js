@@ -41,17 +41,17 @@ cmd({
 
         const { url, title, image, timestamp, ago, views, author } = data.results[0];
 
-        let info = ` *\`📽️ 𝚂𝚄𝙱𝚉𝙴𝚁𝙾 𝚈𝚃 𝙿𝙻𝙰𝚈𝙴𝚁 📽️\`*\n\n` +
+        let info = `📽️ *\`𝚂𝚄𝙱𝚉𝙴𝚁𝙾 𝚈𝚃 𝙿𝙻𝙰𝚈𝙴𝚁\`*📽️\n\n⟡─────────────────⟡\n` +
             `🎵 *Title:* ${title || "Unknown"}\n` +
             `⏳ *Duration:* ${timestamp || "Unknown"}\n` +
             `👀 *Views:* ${views || "Unknown"}\n` +
             `🌏 *Release Ago:* ${ago || "Unknown"}\n` +
             `👤 *Author:* ${author?.name || "Unknown"}\n` +
-            `🖇 *Url:* ${url || "Unknown"}\n\n⟡─────────────────⟡\n\n` +
+            `🖇 *Url:* ${url || "Unknown"}\n\n⟡─────────────────⟡\n` +
             `🔢 *Reply with your choice:*\n\n` +
-            `1️⃣ | *Audio* Type 🎵\n` +
-            `2️⃣ | *Document* Type 📁\n` +
-            `3️⃣ | *Video* Type 🎥\n\n` +
+            `1️⃣ |  *Audio* Type 🎵\n` +
+            `2️⃣ |  *Document* Type 📁\n` +
+            `3️⃣ |  *Video* Type 🎥\n\n` +
 
             `${config.FOOTER || "> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍʀ ғʀᴀɴᴋ"}`;
 
