@@ -1,689 +1,165 @@
-//  SUBZERO MD PROPERTY
-// MADE BY MR FRANK
-// REMOVE THIS IF YOU ARE GAY
-
-const axios = require('axios');
-const config = require('../config');
-
-
-
-const { cmd } = require('../command');
-const { fetchJson } = require('../lib/functions');
+const { cmd } = require("../command");
+const axios = require("axios");
 
 cmd({
-  pattern: 'epl',
-  alias: 'englishspremierleague',
-  react: '⚽',
-  desc: 'Display current EPL standings',
-  category: 'sports',
+  pattern: "eplstandings",
+  alias: ["epltable", "standings"],
+  react: '🏆',
+  desc: "Get English Premier League standings.",
+  category: "sports",
+  use: ".eplstandings",
   filename: __filename
 }, async (conn, mek, m, { from, reply }) => {
   try {
-    // Retrieve the data from the API
-    const data = await fetchJson('https://api.dreaded.site/api/standings/PL');
-    
-    // Access the standings from the "data" property as per your original snippet
-    const standings = data.data;
-    
-    let message = '🏆 *\`EPL TABLE STANDINGS\`* 🏆\n\n';
-    
-    if (Array.isArray(standings)) {
-      standings.forEach((team) => {
-        message += `${team.position}. ${team.team} - ${team.points} pts\n`;
-      });
-      // Add "> subzero" at the bottom of the results
-      message += '\n> subzero';
-    } else {
-      // In case the structure is different, display the raw data
-      message += standings;
+    // Add a reaction to indicate processing
+    await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
+
+    // Prepare the API URL
+    const apiUrl = "https://apis-keith.vercel.app/epl/standings";
+
+    // Call the API using GET
+    const response = await axios.get(apiUrl);
+
+    // Check if the API response is valid
+    if (!response.data || !response.data.status || !response.data.result || !response.data.result.standings) {
+      return reply('❌ Unable to fetch EPL standings. Please try again later.');
     }
-        
-    // Send the standings with an image
-    await conn.sendMessage(from, {
-      image: { url: `https://i.postimg.cc/nVKJnFnn/IMG-20250305-WA0005.jpg` }, // Image URL
-      caption: message,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363304325601080@newsletter',
-          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
 
+    // Extract standings data
+    const { competition, standings } = response.data.result;
+
+    // Format the standings into a readable message
+    let standingsList = `🏆 *${competition} - Standings* 🏆\n\n`;
+    standings.forEach(team => {
+      standingsList += `*${team.position}.* ${team.team}\n`;
+      standingsList += `📊 *Played:* ${team.played} | *Won:* ${team.won} | *Draw:* ${team.draw} | *Lost:* ${team.lost}\n`;
+      standingsList += `⚽ *Goals For:* ${team.goalsFor} | *Goals Against:* ${team.goalsAgainst} | *Goal Difference:* ${team.goalDifference}\n`;
+      standingsList += `📈 *Points:* ${team.points}\n\n`;
+    });
+
+    // Send the standings list to the user
+    await reply(standingsList);
+
+    // Add a reaction to indicate success
+    await conn.sendMessage(from, { react: { text: '✅', key: m.key } });
   } catch (error) {
-    console.error('Error fetching Premier League standings:', error);
-    reply('Something went wrong. Unable to fetch Premier League standings.');
-  }
-});
+    console.error('Error fetching EPL standings:', error);
+    reply('❌ Unable to fetch EPL standings. Please try again later.');
 
-// BUNDESLIGA
-
-cmd({
-  pattern: 'bundesliga',
-  alias: 'bundeliga',
-  react: '⚽',
-  desc: 'Display current EPL standings',
-  category: 'sports',
-  filename: __filename
-}, async (conn, mek, m, { from, reply }) => {
-  try {
-    // Retrieve the data from the API
-    const data = await fetchJson('https://api.dreaded.site/api/standings/BL1');
-    
-    // Access the standings from the "data" property as per your original snippet
-    const standings = data.data;
-    
-    let message = '🏆 *\`BUNDESLIGA STANDINGS\`* 🏆\n\n';
-    
-    if (Array.isArray(standings)) {
-      standings.forEach((team) => {
-        message += `${team.position}. ${team.team} - ${team.points} pts\n`;
-      });
-      // Add "> subzero" at the bottom of the results
-      message += '\n> subzero';
-    } else {
-      // In case the structure is different, display the raw data
-      message += standings;
-    }
-        
-    // Send the standings with an image
-    await conn.sendMessage(from, {
-      image: { url: `https://i.postimg.cc/nVKJnFnn/IMG-20250305-WA0005.jpg` }, // Image URL
-      caption: message,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363304325601080@newsletter',
-          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
-
-  } catch (error) {
-    console.error('Error fetching Bundesliga standings:', error);
-    reply('Something went wrong. Unable to fetch Bundesliga standings.');
-  }
-});
-
-// LALIGA
-
-cmd({
-  pattern: 'laliga',
-  alias: 'llga',
-  react: '⚽',
-  desc: 'Display current EPL standings',
-  category: 'sports',
-  filename: __filename
-}, async (conn, mek, m, { from, reply }) => {
-  try {
-    // Retrieve the data from the API
-    const data = await fetchJson('https://api.dreaded.site/api/standings/PD');
-    
-    // Access the standings from the "data" property as per your original snippet
-    const standings = data.data;
-    
-    let message = '🏆 *\`LALIGA TABLE STANDINGS\`* 🏆\n\n';
-    
-    if (Array.isArray(standings)) {
-      standings.forEach((team) => {
-        message += `${team.position}. ${team.team} - ${team.points} pts\n`;
-      });
-      // Add "> subzero" at the bottom of the results
-      message += '\n> subzero';
-    } else {
-      // In case the structure is different, display the raw data
-      message += standings;
-    }
-        
-    // Send the standings with an image
-    await conn.sendMessage(from, {
-      image: { url: `https://i.postimg.cc/nVKJnFnn/IMG-20250305-WA0005.jpg` }, // Image URL
-      caption: message,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363304325601080@newsletter',
-          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
-
-  } catch (error) {
-    console.error('Error fetching La Liga standings:', error);
-    reply('Something went wrong. Unable to fetch La Liga standings.');
+    // Add a reaction to indicate failure
+    await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
   }
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// DADDY FRANK OFFICIAL
-
-
-/* //  SUBZERO MD PROPERTY
-// MADE BY MR FRANK
-// REMOVE THIS IF YOU ARE GAY
-
-const axios = require('axios');
-const config = require('../config');
-const { cmd } = require('../command');
-const { fetchJson } = require('../lib/functions');
+// SUBZERO EPL RESULTS
 
 cmd({
-  pattern: 'epl',
-  alias: 'englishspremierleague',
+  pattern: "finishedeplmatches",
+  alias: ["eplfinished", "eplresults"],
   react: '⚽',
-  desc: 'Display current EPL standings',
-  category: 'sports',
+  desc: "Get finished English Premier League matches.",
+  category: "sports",
+  use: ".finishedEplmatches",
   filename: __filename
 }, async (conn, mek, m, { from, reply }) => {
   try {
-    // Retrieve the data from the API
-    const data = await fetchJson('https://api.dreaded.site/api/standings/PL');
-    
-    // Access the standings from the "data" property as per your original snippet
-    const standings = data.data;
-    
-    let message = '🏆 *\`EPL TABLE STANDINGS\`* 🏆\n\n';
-    
-    if (Array.isArray(standings)) {
-      standings.forEach((team, index) => {
-        message += `${team.position}. ${team.team} - ${team.points} pts\n`;
-      });
-      // Add footer after the standings, regardless of the number of teams
-      message += '\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ sᴜʙᴢᴇʀᴏ ʙᴏᴛ\n';
-    } else {
-      // In case the structure is different, display the raw data
-      message += standings;
-    }
-        
-    // Send the standings with an image
-    await conn.sendMessage(from, {
-      image: { url: `https://i.ibb.co/4g5ZZnWZ/mrfrankofc.jpg` }, // Image URL
-      caption: message,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363304325601080@newsletter',
-          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
+    // Add a reaction to indicate processing
+    await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
 
+    // Prepare the API URL
+    const apiUrl = "https://apis-keith.vercel.app/epl/matches";
+
+    // Call the API using GET
+    const response = await axios.get(apiUrl);
+
+    // Check if the API response is valid
+    if (!response.data || !response.data.status || !response.data.result || !response.data.result.matches) {
+      return reply('❌ Unable to fetch finished matches. Please try again later.');
+    }
+
+    // Extract match data
+    const { competition, matches } = response.data.result;
+
+    // Filter only finished matches
+    const finishedMatches = matches.filter(match => match.status === "FINISHED");
+
+    // Format the matches into a readable message
+    let matchList = `⚽ *${competition} - Finished Matches* ⚽\n\n`;
+    finishedMatches.forEach((match, index) => {
+      matchList += `*Match ${index + 1}:*\n`;
+      matchList += `🏠 *Home Team:* ${match.homeTeam}\n`;
+      matchList += `🛫 *Away Team:* ${match.awayTeam}\n`;
+      matchList += `📅 *Matchday:* ${match.matchday}\n`;
+      matchList += `📊 *Score:* ${match.score}\n`;
+      matchList += `🏆 *Winner:* ${match.winner}\n\n`;
+    });
+
+    // Send the match list to the user
+    await reply(matchList);
+
+    // Add a reaction to indicate success
+    await conn.sendMessage(from, { react: { text: '✅', key: m.key } });
   } catch (error) {
-    console.error('Error fetching Premier League standings:', error);
-    reply('Something went wrong. Unable to fetch Premier League standings.');
+    console.error('Error fetching finished matches:', error);
+    reply('❌ Unable to fetch finished matches. Please try again later.');
+
+    // Add a reaction to indicate failure
+    await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
   }
 });
 
-// BUNDESLIGA
+
+// EPL MATCHES
+
 
 cmd({
-  pattern: 'bundesliga',
-  alias: 'bundeliga',
+  pattern: "upcomingeplmatches",
+  alias: ["eplmatches", "epl"],
   react: '⚽',
-  desc: 'Display current EPL standings',
-  category: 'sports',
+  desc: "Get upcoming English Premier League matches.",
+  category: "sports",
+  use: ".upcomingEplmatches",
   filename: __filename
 }, async (conn, mek, m, { from, reply }) => {
   try {
-    // Retrieve the data from the API
-    const data = await fetchJson('https://api.dreaded.site/api/standings/BL1');
-    
-    // Access the standings from the "data" property as per your original snippet
-    const standings = data.data;
-    
-    let message = '🏆 *\`BUNDESLIGA STANDINGS\`* 🏆\n\n';
-    
-    if (Array.isArray(standings)) {
-      standings.forEach((team, index) => {
-        message += `${team.position}. ${team.team} - ${team.points} pts\n`;
-      });
-      // Add footer after the standings, regardless of the number of teams
-      message += '\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ sᴜʙᴢᴇʀᴏ ʙᴏᴛ\n';
-    } else {
-      // In case the structure is different, display the raw data
-      message += standings;
-    }
-        
-    // Send the standings with an image
-    await conn.sendMessage(from, {
-      image: { url: `https://i.ibb.co/KjBxCbrM/mrfrankofc.jpg` }, // Image URL
-      caption: message,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363304325601080@newsletter',
-          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
+    // Add a reaction to indicate processing
+    await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
 
+    // Prepare the API URL
+    const apiUrl = "https://apis-keith.vercel.app/epl/upcomingmatches";
+
+    // Call the API using GET
+    const response = await axios.get(apiUrl);
+
+    // Check if the API response is valid
+    if (!response.data || !response.data.status || !response.data.result || !response.data.result.upcomingMatches) {
+      return reply('❌ Unable to fetch upcoming matches. Please try again later.');
+    }
+
+    // Extract match data
+    const { competition, upcomingMatches } = response.data.result;
+
+    // Format the matches into a readable message
+    let matchList = `⚽ *${competition} - Upcoming Matches* ⚽\n\n`;
+    upcomingMatches.forEach((match, index) => {
+      matchList += `*Match ${index + 1}:*\n`;
+      matchList += `🏠 *Home Team:* ${match.homeTeam}\n`;
+      matchList += `🛫 *Away Team:* ${match.awayTeam}\n`;
+      matchList += `📅 *Date:* ${match.date}\n`;
+      matchList += `📋 *Matchday:* ${match.matchday}\n\n`;
+    });
+
+    // Send the match list to the user
+    await reply(matchList);
+
+    // Add a reaction to indicate success
+    await conn.sendMessage(from, { react: { text: '✅', key: m.key } });
   } catch (error) {
-    console.error('Error fetching Bundesliga standings:', error);
-    reply('Something went wrong. Unable to fetch Bundesliga standings.');
+    console.error('Error fetching upcoming matches:', error);
+    reply('❌ Unable to fetch upcoming matches. Please try again later.');
+
+    // Add a reaction to indicate failure
+    await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
   }
 });
-
-// LALIGA
-
-cmd({
-  pattern: 'laliga',
-  alias: 'llga',
-  react: '⚽',
-  desc: 'Display current EPL standings',
-  category: 'sports',
-  filename: __filename
-}, async (conn, mek, m, { from, reply }) => {
-  try {
-    // Retrieve the data from the API
-    const data = await fetchJson('https://api.dreaded.site/api/standings/PD');
-    
-    // Access the standings from the "data" property as per your original snippet
-    const standings = data.data;
-    
-    let message = '🏆 *\`LALIGA TABLE STANDINGS\`* 🏆\n\n';
-    
-    if (Array.isArray(standings)) {
-      standings.forEach((team, index) => {
-        message += `${team.position}. ${team.team} - ${team.points} pts\n`;
-      });
-      // Add footer after the standings, regardless of the number of teams
-      message += '\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ sᴜʙᴢᴇʀᴏ ʙᴏᴛ\n';
-    } else {
-      // In case the structure is different, display the raw data
-      message += standings;
-    }
-        
-    // Send the standings with an image
-    await conn.sendMessage(from, {
-      image: { url: `https://i.ibb.co/JRCwLzd1/mrfrankofc.jpg` }, // Image URL
-      caption: message,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363304325601080@newsletter',
-          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
-
-  } catch (error) {
-    console.error('Error fetching La Liga standings:', error);
-    reply('Something went wrong. Unable to fetch La Liga standings.');
-  }
-});
-
-// DADDY FRANK OFFICIAL
-
-
-*/
-/*
-//  SUBZERO MD PROPERTY
-// MADE BY MR FRANK
-// REMOVE THIS IF YOU ARE GAY
-
-const axios = require('axios');
-const config = require('../config');
-const { cmd } = require('../command');
-const { fetchJson } = require('../lib/functions');
-
-cmd({
-  pattern: 'epl',
-  alias: 'englishspremierleague',
-  react: '⚽',
-  desc: 'Display current EPL standings',
-  category: 'sports',
-  filename: __filename
-}, async (conn, mek, m, { from, reply }) => {
-  try {
-    // Retrieve the data from the API
-    const data = await fetchJson('https://api.dreaded.site/api/standings/PL');
-    
-    // Access the standings from the "data" property as per your original snippet
-    const standings = data.data;
-    
-    let message = '🏆 *\`EPL TABLE STANDINGS\`* 🏆\n\n';
-    
-    if (Array.isArray(standings)) {
-      standings.forEach((team, index) => {
-        message += `${team.position}. ${team.team} - ${team.points} pts\n`;
-        if (index === 19) { // 20th point
-          message += '\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ sᴜʙᴢᴇʀᴏ ʙᴏᴛ\n';
-        }
-      });
-    } else {
-      // In case the structure is different, display the raw data
-      message += standings;
-    }
-        
-    // Send the standings with an image
-    await conn.sendMessage(from, {
-      image: { url: `https://i.ibb.co/4g5ZZnWZ/mrfrankofc.jpg` }, // Image URL
-      caption: message,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363304325601080@newsletter',
-          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
-
-  } catch (error) {
-    console.error('Error fetching Premier League standings:', error);
-    reply('Something went wrong. Unable to fetch Premier League standings.');
-  }
-});
-
-// BUNDESLIGA
-
-cmd({
-  pattern: 'bundesliga',
-  alias: 'bundeliga',
-  react: '⚽',
-  desc: 'Display current EPL standings',
-  category: 'sports',
-  filename: __filename
-}, async (conn, mek, m, { from, reply }) => {
-  try {
-    // Retrieve the data from the API
-    const data = await fetchJson('https://api.dreaded.site/api/standings/BL1');
-    
-    // Access the standings from the "data" property as per your original snippet
-    const standings = data.data;
-    
-    let message = '🏆 *\`BUNDESLIGA STANDINGS\`* 🏆\n\n';
-    
-    if (Array.isArray(standings)) {
-      standings.forEach((team, index) => {
-        message += `${team.position}. ${team.team} - ${team.points} pts\n`;
-        if (index === 19) { // 20th point
-          message += '\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ sᴜʙᴢᴇʀᴏ ʙᴏᴛ\n';
-        }
-      });
-    } else {
-      // In case the structure is different, display the raw data
-      message += standings;
-    }
-        
-    // Send the standings with an image
-    await conn.sendMessage(from, {
-      image: { url: `https://i.ibb.co/KjBxCbrM/mrfrankofc.jpg` }, // Image URL
-      caption: message,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363304325601080@newsletter',
-          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
-
-  } catch (error) {
-    console.error('Error fetching Bundesliga standings:', error);
-    reply('Something went wrong. Unable to fetch Bundesliga standings.');
-  }
-});
-
-// LALIGA
-
-cmd({
-  pattern: 'laliga',
-  alias: 'llga',
-  react: '⚽',
-  desc: 'Display current EPL standings',
-  category: 'sports',
-  filename: __filename
-}, async (conn, mek, m, { from, reply }) => {
-  try {
-    // Retrieve the data from the API
-    const data = await fetchJson('https://api.dreaded.site/api/standings/PD');
-    
-    // Access the standings from the "data" property as per your original snippet
-    const standings = data.data;
-    
-    let message = '🏆 *\`LALIGA TABLE STANDINGS\`* 🏆\n\n';
-    
-    if (Array.isArray(standings)) {
-      standings.forEach((team, index) => {
-        message += `${team.position}. ${team.team} - ${team.points} pts\n`;
-        if (index === 19) { // 20th point
-          message += '\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ sᴜʙᴢᴇʀᴏ ʙᴏᴛ\n';
-        }
-      });
-    } else {
-      // In case the structure is different, display the raw data
-      message += standings;
-    }
-        
-    // Send the standings with an image
-    await conn.sendMessage(from, {
-      image: { url: `https://i.ibb.co/JRCwLzd1/mrfrankofc.jpg` }, // Image URL
-      caption: message,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363304325601080@newsletter',
-          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
-
-  } catch (error) {
-    console.error('Error fetching La Liga standings:', error);
-    reply('Something went wrong. Unable to fetch La Liga standings.');
-  }
-});
-*/
-// DADDY FRANK OFFICIAL
-
-
-
-
-
-/* //  SUBZERO MD PROPERTY
-// MADE BY MR FRANK
-// REMOVE THIS IF YOU ARE GAY
-
-
-const axios = require('axios');
-const config = require('../config');
-const { cmd } = require('../command');
-const { fetchJson } = require('../lib/functions');
-
-cmd({
-  pattern: 'epl',
-  alias: 'englishspremierleague',
-  react: '⚽',
-  desc: 'Display current EPL standings',
-  category: 'sports',
-  filename: __filename
-}, async (conn, mek, m, { from, reply }) => {
-  try {
-    // Retrieve the data from the API
-    const data = await fetchJson('https://api.dreaded.site/api/standings/PL');
-    
-    // Access the standings from the "data" property as per your original snippet
-    const standings = data.data;
-    
-    let message = '🏆 *\`EPL TABLE STANDINGS\`* 🏆\n\n';
-    
-    if (Array.isArray(standings)) {
-      standings.forEach(team => {
-        message += `${team.position}. ${team.team} - ${team.points} pts`;
-      });
-    } else {
-      // In case the structure is different, display the raw data
-      message += standings
-    }
-        
-        // Send the standings with an image
-    await conn.sendMessage(from, {
-      image: { url: `https://i.ibb.co/4g5ZZnWZ/mrfrankofc.jpg` }, // Image URL
-      caption: message,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363304325601080@newsletter',
-          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
-
-  } catch (error) {
-    console.error('Error fetching Premier League standings:', error);
-    reply('Something went wrong. Unable to fetch Premier League standings.');
-  }
-});
-    // BUNDESLIGA
-
-cmd({
-  pattern: 'bundesliga',
-  alias: 'bundeliga',
-  react: '⚽',
-  desc: 'Display current EPL standings',
-  category: 'sports',
-  filename: __filename
-}, async (conn, mek, m, { from, reply }) => {
-  try {
-    // Retrieve the data from the API
-    const data = await fetchJson('https://api.dreaded.site/api/standings/BL1');
-    
-    // Access the standings from the "data" property as per your original snippet
-    const standings = data.data;
-    
-    let message = '🏆 *\`BUNDESLIGA STANDINGS\`* 🏆\n\n';
-    
-    if (Array.isArray(standings)) {
-      standings.forEach(team => {
-        message += `${team.position}. ${team.team} - ${team.points} pts`;
-      });
-    } else {
-      // In case the structure is different, display the raw data
-      message += standings
-    }
-        
-        // Send the standings with an image
-    await conn.sendMessage(from, {
-      image: { url: `https://i.ibb.co/KjBxCbrM/mrfrankofc.jpg` }, // Image URL
-      caption: message,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363304325601080@newsletter',
-          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
-
-  } catch (error) {
-    console.error('Error fetching Premier League standings:', error);
-    reply('Something went wrong. Unable to fetch Premier League standings.');
-  }
-});
-    // LALIGA
-cmd({
-  pattern: 'laliga',
-  alias: 'llga',
-  react: '⚽',
-  desc: 'Display current EPL standings',
-  category: 'sports',
-  filename: __filename
-}, async (conn, mek, m, { from, reply }) => {
-  try {
-    // Retrieve the data from the API
-    const data = await fetchJson('https://api.dreaded.site/api/standings/PD');
-    
-    // Access the standings from the "data" property as per your original snippet
-    const standings = data.data;
-    
-    let message = '🏆 *\`LALIGA TABLE STANDINGS\`* 🏆\n\n';
-    
-    if (Array.isArray(standings)) {
-      standings.forEach(team => {
-        message += `${team.position}. ${team.team} - ${team.points} pts`;
-      });
-    } else {
-      // In case the structure is different, display the raw data
-      message += standings
-    }
-        
-        // Send the standings with an image
-    await conn.sendMessage(from, {
-      image: { url: `https://i.ibb.co/JRCwLzd1/mrfrankofc.jpg` }, // Image URL
-      caption: message,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363304325601080@newsletter',
-          newsletterName: '『 𝐒𝐔𝐁𝐙𝐄𝐑𝐎 𝐌𝐃 』',
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
-
-  } catch (error) {
-    console.error('Error fetching Premier League standings:', error);
-    reply('Something went wrong. Unable to fetch Premier League standings.');
-  }
-});
-    // DADDY FRANK OFFICIAL
-*/
-
-
-
-
-
-
