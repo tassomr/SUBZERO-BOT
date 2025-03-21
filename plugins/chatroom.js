@@ -41,16 +41,16 @@ cmd({
 
         const { url, title, image, timestamp, ago, views, author } = data.results[0];
 
-        let info = ` *❄️ sᴜʙᴢᴇʀᴏ sᴏɴɢ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ ❄️*\n\n` +
+        let info = ` *\`📽️ 𝚂𝚄𝙱𝚉𝙴𝚁𝙾 𝚈𝙾𝚄𝚃𝚄𝙱𝙴 𝙿𝙻𝙰𝚈𝙴𝚁📽️\`*\n\n` +
             `🎵 *Title:* ${title || "Unknown"}\n` +
             `⏳ *Duration:* ${timestamp || "Unknown"}\n` +
             `👀 *Views:* ${views || "Unknown"}\n` +
             `🌏 *Release Ago:* ${ago || "Unknown"}\n` +
             `👤 *Author:* ${author?.name || "Unknown"}\n` +
-            `🖇 *Url:* ${url || "Unknown"}\n⟡────────────⟡\n\n` +
-            `🔽 *Reply with your choice:*\n` +
-            `1️⃣. *Audio Type* 🎵\n` +
-            `2️⃣. *Document Type* 📁\n\n` +
+            `🖇 *Url:* ${url || "Unknown"}\n\n⟡────────────────⟡\n\n` +
+            `🔢 *Reply with your choice:*\n` +
+            `1️⃣ | *Audio* Type 🎵\n` +
+            `2️⃣ | *Document* Type 📁\n\n` +
             `${config.FOOTER || "> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍʀ ғʀᴀɴᴋ"}`;
 
         const sentMsg = await conn.sendMessage(from, { image: { url: image }, caption: info }, { quoted: mek });
