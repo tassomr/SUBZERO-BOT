@@ -1,4 +1,4 @@
-const { cmd } = require('../command');
+/* const { cmd } = require('../command');
 const webp = require('node-webpmux');
 const fs = require('fs-extra');
 const { Sticker } = require("wa-sticker-formatter");
@@ -41,13 +41,13 @@ cmd(
         }
     }
 );
-
+*/
 /**
  * Convert a webp buffer to an image buffer (png/jpg).
  * @param {Buffer} webpBuffer - The webp sticker buffer.
  * @returns {Promise<Buffer>} - The converted image buffer.
  */
-async function convertWebpToImage(webpBuffer) {
+/* async function convertWebpToImage(webpBuffer) {
     try {
         // Write the webp buffer to a temporary file
         const tempWebpPath = './temp/temp_sticker.webp';
@@ -76,3 +76,4 @@ async function convertWebpToImage(webpBuffer) {
         throw new Error("Failed to convert sticker to image.");
     }
 }
+*/
