@@ -16,6 +16,7 @@ initializeAntiDeleteSettings();
 cmd({
     pattern: "antidelete",
     alias: ['antidel', 'ad'],
+    react: '🚀',
     desc: "Sets up the Antidelete",
     category: "misc",
     filename: __filename
@@ -49,10 +50,10 @@ async (conn, mek, m, { from, reply, q, text, isCreator, fromMe }) => {
                 await setAnti('dm', !dmStatus);
                 return reply(`_AntiDelete for Direct Messages ${!dmStatus ? 'enabled' : 'disabled'}._`);
 
-            case 'all':
+            case 'true':
                 await setAnti('gc', true);
                 await setAnti('dm', true);
-                return reply('_AntiDelete set for all chats._');
+                return reply('_AntiDelete set for true/on all chats._');
 
             case 'status':
                 const currentDmStatus = await getAnti('dm');
@@ -60,13 +61,13 @@ async (conn, mek, m, { from, reply, q, text, isCreator, fromMe }) => {
                 return reply(`*⛔ AntiDelete Status ⛔*\n\n*👤 Inbox AntiDelete:* ${currentDmStatus ? 'Enabled' : 'Disabled'}\n*👥 Group Chat AntiDelete:* ${currentGcStatus ? 'Enabled' : 'Disabled'}`);
 
             default:
-                const helpMessage = `*⭕ ━❮  \`ANTIDELETE SETTINGS\`  ❯━ ⭕*\n\n
+                const helpMessage = `*━❮  \`ANTIDELETE SETTINGS\`  ❯━ *\n\n
 ➪ \`\`\`.antidelete on\`\`\`\n - Reset AntiDelete for all chats (disabled by default)\n
 ➪ \`\`\`.antidelete off gc\`\`\`\n - Disable AntiDelete for Group Chats\n
 ➪ \`\`\`.antidelete off dm\`\`\`\n - Disable AntiDelete for Direct Messages\n
 ➪ \`\`\`.antidelete set gc\`\`\`\n - Toggle AntiDelete for Group Chats\n
 ➪ \`\`\`.antidelete set dm\`\`\`\n - Toggle AntiDelete for Direct Messages\n
-➪ \`\`\`.antidelete all\`\`\`\n - Enable AntiDelete for all chats\n
+➪ \`\`\`.antidelete true\`\`\`\n - Enable AntiDelete for all chats\n
 ➪ \`\`\`.antidelete status\`\`\`\n - Check current AntiDelete status`;
 
                 return reply(helpMessage);
