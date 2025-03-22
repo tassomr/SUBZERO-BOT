@@ -19,9 +19,9 @@ cmd({
 
     // Extract the mimetype from the quoted message
     let mime = (quoted.msg || quoted).mimetype || "";
-    let mediaType = "";
+    console.log("Extracted mimetype:", mime); // Debugging: Log the mimetype
 
-    // Determine the media type based on the mimetype
+    let mediaType = "";
     if (mime.startsWith("image")) {
       mediaType = "image";
     } else if (mime.startsWith("video")) {
@@ -29,6 +29,7 @@ cmd({
     } else if (mime.startsWith("audio")) {
       mediaType = "audio";
     } else {
+      console.log("Unsupported mimetype detected:", mime); // Debugging: Log unsupported mimetype
       return reply("❌ Unsupported media type. Please reply to a status, photo, or video message.");
     }
 
@@ -51,7 +52,7 @@ cmd({
     reply("✅ Media saved and sent to your private chat!");
 
   } catch (error) {
-    console.error("Error in save command:", error);
+    console.error("Error in save command:", error); // Debugging: Log the error
     reply("❌ An error occurred while saving the media.");
   }
 });
