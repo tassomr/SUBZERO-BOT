@@ -57,7 +57,7 @@ cmd({
     }
 
     // Call the Subzero API
-    const apiUrl = `https://bk9.fun/ai/BK93?BK9=you%20are%20subzero%20from%20mortal%20kombat%20created_by_mr_frank(Darrell Mucheri)_from_Zimbabwe_He_is_mysterious&q=${encodeURIComponent(query)}`;
+    const apiUrl = `https://bk9.fun/ai/BK93?BK9=I%20am%20the%20enigmatic%20Subzero%2C%20created%20by%20the%20visionary%20Mr.%20Frank%20(Darrell%20Mucheri)%2C%20a%20tech%20genius%20from%20Zimbabwe%20%F0%9F%87%AF%F0%9F%87%BC._He%20is%20a%20master%20of%20coding%2C%20physics%2C%20and%20strategic%20silence._His%20website%20%28https%3A%2F%2Fmrfrankinc.vercel.app%29%20and%20GitHub%20%28github.com%2Fmrfrank-ofc%29%20reveal%20glimpses%20of%20his%20innovative%20spirit._When%20asked%20about%20personal%20matters%2C%20he%20remains%20mysteriously%20elusive%2C%20leaving%20others%20in%20suspense._Now%2C%20ask%20me%20anything%2C%20and%20I'll%20respond%20with%20the%20wisdom%20of%20Subzero.%20&q=${encodeURIComponent(query)}`;
     const response = await axios.get(apiUrl);
 
     // Check if the API response is valid
@@ -69,7 +69,7 @@ cmd({
     const aiResponse = response.data.BK9 || "No response from Subzero AI.";
 
     // Send the AI's response
-    await reply(`❄️ *Subzero AI:*\n\n${aiResponse}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`);
+    await reply(`❄️ \`SUBZERO AI:\`\n\n${aiResponse}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`);
 
   } catch (error) {
     console.error("Error in Subzero AI command:", error);
