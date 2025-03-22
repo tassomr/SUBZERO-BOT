@@ -759,8 +759,8 @@ cmd({
 });
 
 cmd({
-    pattern: "cmdmenu",
-    alias: ["commandmenu", "cmdlist"],
+    pattern: "setvar",
+    alias: ["envvar", "cmdlist"],
     react: "📜",
     desc: "List all commands and their current status.",
     category: "settings",
@@ -796,6 +796,11 @@ cmd({
 🚫 *6. Anti Bad Word*
    - Current Status: ${config.ANTI_BAD_WORD || "off"}
    - Usage: ${config.PREFIX}antibad on/off
+
+🗑️ *#. Anti Delete*
+   - Current Status: ${config.ANTI_BAD_WORD || "off"}
+   - Usage: ${config.PREFIX}antidelete on/off
+
 
 🖼️ *7. Auto Sticker*
    - Current Status: ${config.AUTO_STICKER || "off"}
