@@ -1,17 +1,16 @@
+make it compress rthe song like almost jalf the size
+
 const axios = require("axios");
 const { cmd } = require("../command");
 const yts = require("yt-search"); // For searching YouTube
-const fs = require("fs");
-const { exec } = require("child_process");
-const path = require("path");
 
 cmd(
     {
         pattern: "songa",
         alias: ["mp3a", "ytmp3a"],
-        desc: "Download a song from YouTube as MP3 (compressed).",
+        desc: "Download a song from YouTube as MP3.",
         category: "download",
-        use: "<song name or YouTube URL>\nExample: .songa faded\nExample: .songa https://youtu.be/UDSYAD1sQuE",
+        use: "<song name or YouTube URL>\nExample: .song faded\nExample: .song https://youtu.be/UDSYAD1sQuE",
         filename: __filename,
         react: "🎵"
     },
@@ -20,7 +19,7 @@ cmd(
             const input = args.join(" "); // Combine the query parts
 
             if (!input) {
-                return reply("Please provide a song name or YouTube URL.\nExample: `.songa faded`\nExample: `.songa https://youtu.be/UDSYAD1sQuE`");
+                return reply("Please provide a song name or YouTube URL.\nExample: `.song faded`\nExample: `.song https://youtu.be/UDSYAD1sQuE`");
             }
 
             let youtubeUrl;
@@ -50,66 +49,22 @@ cmd(
             }
 
             // Extract song details
-            const { title, downloadUrl } = response.data.BK9;
+            const { title, image, downloadUrl } = response.data.BK9;
 
-            // Download the song
-            const tempDir = "./temp";
-            const originalFilePath = path.join(tempDir, `${title}_original.mp3`);
-            const compressedFilePath = path.join(tempDir, `${title}_compressed.mp3`);
-
-            // Ensure the temp directory exists
-            if (!fs.existsSync(tempDir)) {
-                fs.mkdirSync(tempDir);
-            }
-
-            // Download the original MP3 file
-            const audioResponse = await axios({
-                method: "get",
-                url: downloadUrl,
-                responseType: "stream"
-            });
-
-            const writer = fs.createWriteStream(originalFilePath);
-            audioResponse.data.pipe(writer);
-
-            await new Promise((resolve, reject) => {
-                writer.on("finish", resolve);
-                writer.on("error", reject);
-            });
-
-            // Compress the MP3 file using FFmpeg
-            await new Promise((resolve, reject) => {
-                exec(
-                    `ffmpeg -i "${originalFilePath}" -b:a 64k "${compressedFilePath}"`,
-                    (error, stdout, stderr) => {
-                        if (error) {
-                            console.error("FFmpeg error:", error);
-                            reject("❌ Failed to compress the audio file.");
-                        } else {
-                            resolve();
-                        }
-                    }
-                );
-            });
-
-            // Send the compressed song to the user
+            // Send the song to the user
             await conn.sendMessage(
                 from,
                 {
-                    audio: fs.readFileSync(compressedFilePath),
+                    audio: { url: downloadUrl },
                     mimetype: "audio/mpeg",
-                    fileName: `${title}_compressed.mp3`,
-                    caption: `🎵 *Title:* ${title}\n📦 *Compressed to 64kbps*\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`
+                    fileName: `${title}.mp3`,
+                    caption: `🎵 *Title:* ${title}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`
                 },
                 { quoted: mek }
             );
 
-            // Clean up temporary files
-            fs.unlinkSync(originalFilePath);
-            fs.unlinkSync(compressedFilePath);
-
         } catch (error) {
-            console.error("Error in songa command:", error);
+            console.error("Error in song command:", error);
             reply("❌ An error occurred while processing your request. Please try again later.");
         }
     }
