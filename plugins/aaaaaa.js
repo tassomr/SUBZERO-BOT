@@ -5,8 +5,8 @@ const yts = require("yt-search"); // For searching YouTube
 
 cmd(
     {
-        pattern: "songa",
-        alias: ["mp3a", "ytmp3a"],
+        pattern: "songx",
+        alias: ["mp3x", "ytmp3"],
         desc: "Download a song from YouTube as MP3.",
         category: "download",
         use: "<song name or YouTube URL>\nExample: .song faded\nExample: .song https://youtu.be/UDSYAD1sQuE",
