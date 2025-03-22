@@ -15,7 +15,7 @@ cmd({
     const query = args.join(" "); // Combine the query parts
 
     if (!query) {
-      return reply("Please provide a query.\nExample: `.perplexity Who is Mrfrankofc?`");
+      return reply("Please provide a query.\nExample: `.perplexity Who is mrfrankofc?`");
     }
 
     // Call the Perplexity API
@@ -38,7 +38,7 @@ cmd({
     }
 
     // Send the AI's response with sources
-    await reply(`🤔 *Perplexity AI:*\n\n${aiResponse}${sourcesText}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`);
+    await reply(`🤔 \` PERPLEXITY AI:\` 🧠\n\n${aiResponse}${sourcesText}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`);
 
   } catch (error) {
     console.error("Error in Perplexity AI command:", error);
