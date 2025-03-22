@@ -1,4 +1,3 @@
-make it compress rthe song like almost jalf the size
 
 const axios = require("axios");
 const { cmd } = require("../command");
