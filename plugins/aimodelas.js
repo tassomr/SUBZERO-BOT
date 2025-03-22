@@ -41,12 +41,12 @@ cmd({
 
 // Subzero AI Command
 cmd({
-  pattern: "subzerot",
+  pattern: "subzero",
   desc: "Interact with Subzero AI.",
   category: "AI",
   use: ".subzero <query>\nExample: .subzero What is your purpose?",
   filename: __filename,
-  alias: ["sz", "sub"],
+  alias: ["sz", "subz","subzeroai","ai"],
   react: "❄️"
 }, async (conn, mek, m, { from, reply, args }) => {
   try {
@@ -84,7 +84,7 @@ cmd({
   category: "AI",
   use: ".llama <query>\nExample: .llama Hi",
   filename: __filename,
-  alias: ["llm", "llama2","llama3","meta","metai","bing","copilot","gpt","chatgpt","gpt3","gpt4","ai","bot","chat","claude","claudeai","gpt3.5","gptturbo"],
+  alias: ["llm", "llama2","llama3","meta","metai","bing","copilot","gpt","chatgpt","gpt3","gpt4","gpt4o","bot","chat","claude","claudeai","gpt3.5","gptturbo"],
   react: "⏳"
 }, async (conn, mek, m, { from, reply, args }) => {
   try {
