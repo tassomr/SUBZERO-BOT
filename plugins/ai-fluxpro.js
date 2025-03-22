@@ -52,7 +52,7 @@ const { fetchJson } = require('../lib/functions');
 
 cmd({
   pattern: 'fluxpro',
-  alias: 'flux',
+  alias: 'flux','sd','stablediffusion',
   react: '🧩',
   desc: 'Generate an image using Flux',
   category: 'image',
@@ -87,7 +87,7 @@ cmd({
       return reply(`*Usage:* ${command} <prompt>\n\n*Example:* ${command} cat`);
     }
 
-    await reply('> *Subzero Processing Image...*');
+    await reply('> *Subzero Processing Image...💡*');
 
     const apiUrl = `https://apis.davidcyriltech.my.id/flux?prompt=${encodeURIComponent(text)}`;
 
