@@ -1,8 +1,8 @@
-
 const axios = require("axios");
 const { cmd } = require("../command");
 const yts = require("yt-search"); // For searching YouTube
 
+// Song Downloader Command
 cmd(
     {
         pattern: "songx",
@@ -48,7 +48,7 @@ cmd(
             }
 
             // Extract song details
-            const { title, image, downloadUrl } = response.data.BK9;
+            const { title, downloadUrl } = response.data.BK9;
 
             // Send the song to the user
             await conn.sendMessage(
@@ -63,19 +63,17 @@ cmd(
             );
 
         } catch (error) {
-            console.error("Error in song command:", error);
+            console.error("Error in songx command:", error);
             reply("❌ An error occurred while processing your request. Please try again later.");
         }
     }
 );
-//%%%%&&&&
 
-
- // For searching YouTube
-cmd
+// Video Downloader Command
+cmd(
     {
         pattern: "videox",
-        alias: "ytvideox",
+        alias: ["ytvideox"],
         desc: "Download a video from YouTube.",
         category: "download",
         use: "<video name or YouTube URL>\nExample: .video lily\nExample: .video https://youtu.be/UDSYAD1sQuE",
@@ -137,7 +135,7 @@ cmd
             );
 
         } catch (error) {
-            console.error("Error in video command:", error);
+            console.error("Error in videox command:", error);
             reply("❌ An error occurred while processing your request. Please try again later.");
         }
     }
