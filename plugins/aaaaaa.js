@@ -68,3 +68,77 @@ cmd(
         }
     }
 );
+//%%%%&&&&
+
+
+ // For searching YouTube
+cmd
+    {
+        pattern: "videox",
+        alias: ["ytvideo", "ytdlx"],
+        desc: "Download a video from YouTube.",
+        category: "download",
+        use: "<video name or YouTube URL>\nExample: .video lily\nExample: .video https://youtu.be/UDSYAD1sQuE",
+        filename: __filename,
+        react: "🎥"
+    },
+    async (conn, mek, m, { args, reply, from }) => {
+        try {
+            const input = args.join(" "); // Combine the query parts
+
+            if (!input) {
+                return reply("Please provide a video name or YouTube URL.\nExample: `.video lily`\nExample: `.video https://youtu.be/UDSYAD1sQuE`");
+            }
+
+            let youtubeUrl;
+
+            // Check if the input is a YouTube URL
+            if (input.startsWith("http://") || input.startsWith("https://")) {
+                youtubeUrl = input;
+            } else {
+                // Search YouTube for the video
+                const searchResults = await yts(input);
+                if (!searchResults || searchResults.videos.length === 0) {
+                    return reply("❌ No results found for your query. Please try again.");
+                }
+                youtubeUrl = searchResults.videos[0].url; // Get the first result's URL
+            }
+
+            // Call the API to fetch video details and download links
+            const apiUrl = `https://bk9.fun/download/youtube?url=${encodeURIComponent(youtubeUrl)}`;
+            const response = await axios.get(apiUrl);
+
+            // Log the API response for debugging
+            console.log("API Response:", response.data);
+
+            // Check if the API response is valid
+            if (!response.data || !response.data.status || !response.data.BK9 || !response.data.BK9.BK8) {
+                return reply("❌ Unable to fetch the video. Please check the URL and try again.");
+            }
+
+            // Extract video details
+            const { title, BK8 } = response.data.BK9;
+
+            // Find the lowest quality video link
+            const lowestQualityVideo = BK8.find(video => video.quality && video.format === "mp4") || BK8[0];
+
+            if (!lowestQualityVideo || !lowestQualityVideo.link) {
+                return reply("❌ No valid video link found.");
+            }
+
+            // Send the video to the user
+            await conn.sendMessage(
+                from,
+                {
+                    video: { url: lowestQualityVideo.link },
+                    caption: `🎥 *Title:* ${title}\n📦 *Quality:* ${lowestQualityVideo.quality || "N/A"}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`
+                },
+                { quoted: mek }
+            );
+
+        } catch (error) {
+            console.error("Error in video command:", error);
+            reply("❌ An error occurred while processing your request. Please try again later.");
+        }
+    }
+);
