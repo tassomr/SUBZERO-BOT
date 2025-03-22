@@ -38,7 +38,7 @@ cmd({
     }
 
     // Send the AI's response with sources
-    await reply(`🤔 \` PERPLEXITY AI:\` 🧠\n\n${aiResponse}${sourcesText}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`);
+    await reply(`🤔 \`PERPLEXITY AI:\` 🧠\n\n${aiResponse}${sourcesText}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`);
 
   } catch (error) {
     console.error("Error in Perplexity AI command:", error);
