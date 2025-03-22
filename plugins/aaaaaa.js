@@ -75,7 +75,7 @@ cmd(
 cmd
     {
         pattern: "videox",
-        alias: ["ytvideo", "ytdlx"],
+        alias: "ytvideox",
         desc: "Download a video from YouTube.",
         category: "download",
         use: "<video name or YouTube URL>\nExample: .video lily\nExample: .video https://youtu.be/UDSYAD1sQuE",
