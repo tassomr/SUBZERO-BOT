@@ -66,7 +66,7 @@ cmd({
     }
 
     // Generate a dynamic file name
-    const fileName = `flux_image.${fileExtension}`;
+    const fileName = `image.${fileExtension}`;
 
     // Send the image with caption and footer
     await conn.sendFile(
