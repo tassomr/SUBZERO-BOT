@@ -3,12 +3,12 @@ const { cmd } = require("../command");
 
 // Gemini AI Command
 cmd({
-  pattern: "geminit",
+  pattern: "gemini",
   desc: "Interact with Gemini AI.",
   category: "AI",
   use: ".gemini <query>\nExample: .gemini What is the capital of France?",
   filename: __filename,
-  alias: ["gmi", "ai"],
+  alias: ["gmi", "geminiai","geminipro","googleai","gemini1.5"],
   react: "🤖"
 }, async (conn, mek, m, { from, reply, args }) => {
   try {
@@ -31,7 +31,7 @@ cmd({
     const aiResponse = response.data.BK9 || "No response from Gemini AI.";
 
     // Send the AI's response
-    await reply(`🤖 *Gemini AI:*\n\n${aiResponse}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`);
+    await reply(`🤖 \`GEMINI AI:\`\n\n${aiResponse}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`);
 
   } catch (error) {
     console.error("Error in Gemini AI command:", error);
@@ -79,19 +79,19 @@ cmd({
 
 // Llama AI Command
 cmd({
-  pattern: "llamat",
+  pattern: "llama",
   desc: "Interact with Llama AI.",
   category: "AI",
   use: ".llama <query>\nExample: .llama Hi",
   filename: __filename,
-  alias: ["llm", "lama"],
-  react: "🦙"
+  alias: ["llm", "llama2","llama3","meta","metai","bing","copilot","gpt","chatgpt","gpt3","gpt4","ai","bot","chat","claude","claudeai","gpt3.5","gptturbo"],
+  react: "⏳"
 }, async (conn, mek, m, { from, reply, args }) => {
   try {
     const query = args.join(" "); // Combine the query parts
 
     if (!query) {
-      return reply("Please provide a query.\nExample: `.llama Hi`");
+      return reply("Please provide a query.\nExample: `.ai Hi`");
     }
 
     // Call the Llama API
@@ -107,7 +107,7 @@ cmd({
     const aiResponse = response.data.BK9 || "No response from Llama AI.";
 
     // Send the AI's response
-    await reply(`🦙 *Llama AI:*\n\n${aiResponse}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`);
+    await reply(`🤖 \`SUBZERO MODEL:\`\n\n${aiResponse}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`);
 
   } catch (error) {
     console.error("Error in Llama AI command:", error);
@@ -117,12 +117,12 @@ cmd({
 
 // Deepseek AI Command
 cmd({
-  pattern: "deepseekt",
+  pattern: "deepseek",
   desc: "Interact with Deepseek AI.",
   category: "AI",
   use: ".deepseek <query>\nExample: .deepseek Hello",
   filename: __filename,
-  alias: ["ds", "seek"],
+  alias: ["ds", "seek","deeseekr1","deepseek-r1"],
   react: "🔍"
 }, async (conn, mek, m, { from, reply, args }) => {
   try {
@@ -145,7 +145,7 @@ cmd({
     const aiResponse = response.data.BK9?.content || response.data.BK9 || "No response from Deepseek AI.";
 
     // Send the AI's response
-    await reply(`🔍 *Deepseek AI:*\n\n${aiResponse}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`);
+    await reply(`🔍 \`Deepseek AI:\`\n\n${aiResponse}\n\n> © Gᴇɴᴇʀᴀᴛᴇᴅ ʙʏ Sᴜʙᴢᴇʀᴏ`);
 
   } catch (error) {
     console.error("Error in Deepseek AI command:", error);
