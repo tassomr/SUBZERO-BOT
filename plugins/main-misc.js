@@ -50,7 +50,12 @@ async (conn, mek, m, { from, reply, q, text, isCreator, fromMe }) => {
                 await setAnti('dm', !dmStatus);
                 return reply(`_AntiDelete for Direct Messages ${!dmStatus ? 'enabled' : 'disabled'}._`);
 
-            case 'true':
+            case 'on':
+                await setAnti('gc', true);
+                await setAnti('dm', true);
+                return reply('_AntiDelete set for true/on all chats._');
+
+            case 'all':
                 await setAnti('gc', true);
                 await setAnti('dm', true);
                 return reply('_AntiDelete set for true/on all chats._');
