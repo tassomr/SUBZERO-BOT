@@ -3,7 +3,7 @@ const { cmd } = require("../command");
 
 cmd({
   pattern: "fbdl",
-  alias: ["facebook", "fbvideo"],
+  alias: ["facebook", "fbvideo","fb"],
   react: '📥',
   desc: "Download videos from Facebook.",
   category: "download",
@@ -55,7 +55,7 @@ cmd({
       caption: `📥 *Video Details*\n\n` +
         `🔖 *Title*: ${title}\n` +
         `📏 *Quality*: ${downloads.find(d => d.quality === "HD") ? "HD" : "SD"}\n\n` +
-        `> © Powered by Mr Frank`,
+        `> © ᴘɪᴡᴇʀᴇᴅ ʙʏ ᴍʀ ғʀᴀɴᴋ`,
       contextInfo: {
         mentionedJid: [m.sender],
         forwardingScore: 999,
