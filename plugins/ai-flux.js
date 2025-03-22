@@ -17,7 +17,7 @@ Support      : wa.me/18062212660
 // Fuck You Bro
 // Mr Frank
 
-
+/*
 const axios = require("axios");
 const { cmd } = require("../command");
 
@@ -82,3 +82,4 @@ cmd({
     reply("❌ An error occurred while processing your request. Please try again later.");
   }
 });
+*/
